@@ -1,0 +1,14 @@
+# Normalise line endings in the repository; Windows checkouts get CRLF back.
+* text=auto
+
+# Binary formats, never diffed or normalised.
+*.png binary
+*.pdf binary
+*.flac binary
+*.mp3 binary
+*.wav binary
+*.mid binary
+*.tgz binary
+
+# The paper is documentation, so it should not count towards the language bar.
+Paper/** linguist-documentation

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "MP3-to-DNA: A Transcription-Based Codec for Storing Music Recordings in DNA"
+authors:
+  - given-names: Teofilus Satria Rada
+    family-names: Insani
+    affiliation: Universitas Pelita Harapan
+repository-code: "https://github.com/pejuangvscode/MP3-to-DNA"
+keywords:
+  - DNA data storage
+  - automatic music transcription
+  - constrained coding
+  - Reed-Solomon
+  - music information retrieval

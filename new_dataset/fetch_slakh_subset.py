@@ -11,13 +11,13 @@ melayani file individual, dan kagglehub.dataset_download() menerima argumen
   1. tarik metadata.yaml tiap track (beberapa KB saja)
   2. baca, pilih satu stem bernada dari kelas instrumen yang diinginkan
   3. tarik HANYA stems/SXX.flac + MIDI/SXX.mid + all_src.mid untuk stem itu
-  4. susun ulang jadi layout Slakh asli, supaya build_corpus.py jalan apa adanya
+  4. susun ulang jadi layout Slakh asli, supaya src.slakh jalan apa adanya
 
 Hasilnya ~400 MB untuk 30 stem, bukan 107,88 GB.
 
-Pakai:
+Pakai, dari root repo:
   pip install kagglehub pyyaml
-  python fetch_slakh_subset.py --out ./slakh_subset --n 30
+  python scripts/fetch_slakh_subset.py --out new_dataset/slakh_subset --n 151
 
 Butuh kredensial Kaggle (kaggle.json di ~/.kaggle/, atau variabel lingkungan
 KAGGLE_USERNAME dan KAGGLE_KEY). kagglehub menyimpan cache sendiri, jadi
@@ -151,8 +151,7 @@ def main():
         print("Lebarkan --first/--last, atau longgarkan --inst.")
 
     print(f"\nLanjut:")
-    print(f"  python build_corpus.py --root {args.out} --out ./corpus \\")
-    print(f"      --audio-ext .flac --min-duration 180 --bitrate 192k --dry-run")
+    print(f"  python -m src.slakh --source {args.out} --out data/slakh_v2")
 
 
 if __name__ == "__main__":
