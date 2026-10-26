@@ -10,5 +10,3 @@
 *.mid binary
 *.tgz binary
 
-# The paper is documentation, so it should not count towards the language bar.
-Paper/** linguist-documentation

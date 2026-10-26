@@ -9,7 +9,7 @@ DNA storage is priced per synthesised nucleotide, and compressed audio is alread
 
 This repository accompanies an undergraduate thesis in Informatics at Universitas Pelita Harapan.
 
-![Codec architecture](Paper/fig1.png)
+![Codec architecture](assets/architecture.png)
 
 ## How it works
 
@@ -74,10 +74,9 @@ python -m src.calibrate --data-dir data/slakh_v2 --split dev --output results/ca
 python -m src.experiment --data-dir data/slakh_v2 --split test --onset-threshold 0.7 --output results/slakh_test_v2
 python -m src.characterize --data-dir data/slakh_v2 --split test --output results/characterization_v2
 python -m src.ablation --data-dir data/slakh_v2 --split test --work-dir results/slakh_test_v2/work --onset-threshold 0.7 --output results/ablation_v2 --transcribe
-python Paper/figures.py
 ```
 
-The steps are, in order: preparing the corpus (constant-tempo filter, per-piece tempo and grid fitting, cutting at long rests, development/test split), calibrating the onset threshold on the development split only, running the codec on the test split, characterising the corpus, running the ablation study, and drawing the paper figures.
+The steps are, in order: preparing the corpus (constant-tempo filter, per-piece tempo and grid fitting, cutting at long rests, development/test split), calibrating the onset threshold on the development split only, running the codec on the test split, characterising the corpus, and running the ablation study.
 
 ## Repository layout
 
@@ -103,7 +102,7 @@ src/
   config.py        every design constant, in one place
 tests/             unit tests
 scripts/           dataset download
-Paper/             conference paper source and figures
+assets/            README images
 data/slakh_v2/     corpus manifest
 ```
 
