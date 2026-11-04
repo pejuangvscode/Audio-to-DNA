@@ -158,6 +158,32 @@ def test_only_filter_selects_a_subset(tmp_path):
     assert [result.sample.name for result in results] == ["s2"]
 
 
+def test_a_sample_that_raises_is_recorded_and_the_run_goes_on(tmp_path, monkeypatch):
+    data = build_corpus(
+        tmp_path / "data",
+        [
+            ("s1", phrase(), "pendek,rendah,tinggi"),
+            ("s2", phrase(start_pitch=55), "sedang,sedang,rendah"),
+        ],
+    )
+
+    def fake_run_sample(sample, out_dir, grid_code, params):
+        if sample.name == "s1":
+            raise ValueError("min() arg is an empty sequence")
+        return experiment.SampleResult(sample, {"sample": sample.name}, [])
+
+    monkeypatch.setattr(experiment, "run_sample", fake_run_sample)
+    crashed = []
+    results = experiment.run_all(data, tmp_path / "results", crashed=crashed)
+
+    assert [result.sample.name for result in results] == ["s2"]
+    assert [name for name, _ in crashed] == ["s1"]
+    assert "ValueError" in crashed[0][1]
+    # without a list to record into, the exception still surfaces
+    with pytest.raises(ValueError):
+        experiment.run_all(data, tmp_path / "results")
+
+
 def test_markdown_table_renders_missing_values(tmp_path):
     lines = experiment._markdown_table(
         [{"a": 1}], [("a", "A"), ("missing", "Missing")]

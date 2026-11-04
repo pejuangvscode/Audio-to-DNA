@@ -1,0 +1,1507 @@
+{
+ "source": "new_dataset\\slakh_subset",
+ "grid_code": 2,
+ "seed": 0,
+ "tracks_with_kept_split": 150,
+ "stems_scanned": 1388,
+ "stems_segmented": 306,
+ "stems_with_tempo_map": 562,
+ "tempo_map_notes": 222473,
+ "tempo_map_notes_kept": 202516,
+ "segments_kept": 1575,
+ "tracks_kept": 150,
+ "dev": 364,
+ "test": 1211,
+ "rejections": [
+  {
+   "track": "Track01876_S01",
+   "reason": "inaudible",
+   "detail": "16% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01876_S07",
+   "reason": "too_short",
+   "detail": "17 notes"
+  },
+  {
+   "track": "Track01876_S11",
+   "reason": "too_short",
+   "detail": "9 notes"
+  },
+  {
+   "track": "Track01876_S14_s00",
+   "reason": "inaudible",
+   "detail": "54% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01877_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 86 (72 BPM from 223.7 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01877_S05",
+   "reason": "off_grid",
+   "detail": "tempo region 86 (72 BPM from 223.7 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01877_S12",
+   "reason": "tempo_map",
+   "detail": "none of 87 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01878_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 70 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01878_S06",
+   "reason": "too_short",
+   "detail": "18 notes"
+  },
+  {
+   "track": "Track01878_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01878_S11",
+   "reason": "off_grid",
+   "detail": "segment 1 sits 0.25 of a unit off after the cut"
+  },
+  {
+   "track": "Track01878_S12",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01878_S13",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01882_S07",
+   "reason": "tempo_map",
+   "detail": "none of 11 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01883_S08",
+   "reason": "too_short",
+   "detail": "6 notes"
+  },
+  {
+   "track": "Track01884_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01884_S11",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01887_S02",
+   "reason": "tempo_map",
+   "detail": "none of 7 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01887_S08",
+   "reason": "tempo_map",
+   "detail": "none of 7 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01889_S08",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01889_S10",
+   "reason": "too_short",
+   "detail": "15 notes"
+  },
+  {
+   "track": "Track01889_S12",
+   "reason": "too_short",
+   "detail": "4 notes"
+  },
+  {
+   "track": "Track01889_S14",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01891_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (59 BPM from 0.0 s): best fit still 0.29 of a grid unit off"
+  },
+  {
+   "track": "Track01891_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 8 (49 BPM from 257.4 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01891_S01",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01891_S05",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01891_S07",
+   "reason": "off_grid",
+   "detail": "segment 0 sits 0.31 of a unit off after the cut"
+  },
+  {
+   "track": "Track01891_S08",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01891_S13",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01892_S04",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01892_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01897_S06",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01897_S14",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01898_S00_s00",
+   "reason": "inaudible",
+   "detail": "100% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01898_S00_s01",
+   "reason": "inaudible",
+   "detail": "92% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01901_S10",
+   "reason": "too_short",
+   "detail": "16 notes"
+  },
+  {
+   "track": "Track01903_S02",
+   "reason": "off_grid",
+   "detail": "tempo region 1 (74 BPM from 0.1 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01903_S02",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01903_S03",
+   "reason": "off_grid",
+   "detail": "tempo region 1 (74 BPM from 0.1 s): best fit still 0.25 of a grid unit off"
+  },
+  {
+   "track": "Track01903_S03",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01903_S09",
+   "reason": "off_grid",
+   "detail": "tempo region 1 (74 BPM from 0.1 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01903_S09",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01903_S12",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01903_S14",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01903_S15",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01905_S00",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 106 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S01",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 212 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S02",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 53 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S03",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 212 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S04",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 212 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 212 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S06",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 53 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01905_S09",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 106 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01908_S05",
+   "reason": "inaudible",
+   "detail": "89% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01911_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01917_S10",
+   "reason": "tempo_map",
+   "detail": "none of 13 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01918_S02_s00",
+   "reason": "inaudible",
+   "detail": "31% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01918_S02_s01",
+   "reason": "inaudible",
+   "detail": "34% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01920_S00",
+   "reason": "too_short",
+   "detail": "21 notes"
+  },
+  {
+   "track": "Track01920_S11",
+   "reason": "too_short",
+   "detail": "9 notes"
+  },
+  {
+   "track": "Track01927_S04",
+   "reason": "too_short",
+   "detail": "14 notes"
+  },
+  {
+   "track": "Track01930_S01",
+   "reason": "off_grid",
+   "detail": "best fit still 0.25 of a grid unit off at 73 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01930_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01930_S13",
+   "reason": "too_short",
+   "detail": "17 notes"
+  },
+  {
+   "track": "Track01931_S05",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01934_S02",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01934_S10",
+   "reason": "too_short",
+   "detail": "6 notes"
+  },
+  {
+   "track": "Track01934_S11_s00",
+   "reason": "inaudible",
+   "detail": "46% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01935_S05",
+   "reason": "inaudible",
+   "detail": "11% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01936_S07",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01936_S09",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (88 BPM from 258.8 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01936_S13",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01936_S15_s00",
+   "reason": "inaudible",
+   "detail": "23% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01937_S02",
+   "reason": "too_short",
+   "detail": "20 notes"
+  },
+  {
+   "track": "Track01937_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01940_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 26 (67 BPM from 110.3 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01943_S06",
+   "reason": "too_short",
+   "detail": "9 notes"
+  },
+  {
+   "track": "Track01945_S06",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01947_S03",
+   "reason": "off_grid",
+   "detail": "best fit still 0.25 of a grid unit off at 54 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01947_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 54 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01947_S08",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 54 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01947_S10",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 54 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01947_S11",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 54 BPM, grid 1; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01948_S02",
+   "reason": "too_short",
+   "detail": "8 notes"
+  },
+  {
+   "track": "Track01948_S05",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01948_S11",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01949_S02",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01949_S06",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01951_S05",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01951_S08_s00",
+   "reason": "inaudible",
+   "detail": "35% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01951_S12",
+   "reason": "too_short",
+   "detail": "4 notes"
+  },
+  {
+   "track": "Track01955_S04",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01956_S02",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01956_S04",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01956_S06",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01959_S04",
+   "reason": "tempo_map",
+   "detail": "none of 2 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01960_S02",
+   "reason": "tempo_map",
+   "detail": "none of 7 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01962_S01",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01963_S04",
+   "reason": "too_short",
+   "detail": "3 notes"
+  },
+  {
+   "track": "Track01965_S01",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 118 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01965_S02",
+   "reason": "too_short",
+   "detail": "8 notes"
+  },
+  {
+   "track": "Track01965_S03",
+   "reason": "too_short",
+   "detail": "16 notes"
+  },
+  {
+   "track": "Track01965_S04",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 59 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01965_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 236 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01965_S06",
+   "reason": "off_grid",
+   "detail": "best fit still 0.29 of a grid unit off at 118 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01965_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 118 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01965_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01965_S11",
+   "reason": "off_grid",
+   "detail": "segment 2 sits 0.32 of a unit off after the cut"
+  },
+  {
+   "track": "Track01967_S06",
+   "reason": "too_short",
+   "detail": "12 notes"
+  },
+  {
+   "track": "Track01973_S06",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01973_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01973_S08",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01974_S03",
+   "reason": "tempo_map",
+   "detail": "none of 2 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01974_S09",
+   "reason": "tempo_map",
+   "detail": "none of 2 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01976_S04",
+   "reason": "tempo_map",
+   "detail": "none of 14 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01976_S05",
+   "reason": "tempo_map",
+   "detail": "none of 14 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01976_S06",
+   "reason": "tempo_map",
+   "detail": "none of 14 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01976_S07_s00",
+   "reason": "inaudible",
+   "detail": "25% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01976_S07_s02",
+   "reason": "inaudible",
+   "detail": "11% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01978_S03",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01978_S06",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01980_S00",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.29 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S00",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (91 BPM from 299.6 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S02",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (91 BPM from 299.6 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S03",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S03",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (91 BPM from 240.9 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S04",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01980_S05",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S05",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (91 BPM from 240.9 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S05",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (91 BPM from 299.6 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (91 BPM from 240.9 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (91 BPM from 299.6 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S08",
+   "reason": "off_grid",
+   "detail": "tempo region 5 (91 BPM from 299.6 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S08",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01980_S10",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01980_S11",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S11",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01980_S12",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S12",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01980_S14",
+   "reason": "off_grid",
+   "detail": "tempo region 0 (91 BPM from 0.0 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01980_S14",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01985_S03_s00",
+   "reason": "inaudible",
+   "detail": "10% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01985_S03_s01",
+   "reason": "inaudible",
+   "detail": "17% of its reference notes start in silence"
+  },
+  {
+   "track": "Track01986_S06",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01986_S07",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01986_S14",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01987_S01",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 60 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S08",
+   "reason": "off_grid",
+   "detail": "best fit still 0.29 of a grid unit off at 120 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S09",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 60 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S10",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 60 BPM, grid 0; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S11",
+   "reason": "off_grid",
+   "detail": "best fit still 0.25 of a grid unit off at 60 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S12",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 60 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01987_S13",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 120 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01989_S05",
+   "reason": "off_grid",
+   "detail": "segment 0 sits 0.26 of a unit off after the cut"
+  },
+  {
+   "track": "Track01989_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 132 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01990_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 1 (57 BPM from 52.7 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (80 BPM from 108.3 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 89 (126 BPM from 233.8 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 90 (124 BPM from 323.9 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S01",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S03",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S08",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (80 BPM from 108.3 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S09",
+   "reason": "off_grid",
+   "detail": "tempo region 1 (57 BPM from 52.7 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S09",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S11",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (80 BPM from 108.3 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track01990_S11",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S14",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S16",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01990_S17",
+   "reason": "tempo_map",
+   "detail": "none of 91 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01993_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01993_S11",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01995_S02",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01995_S03",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01995_S04",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01995_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 240 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01995_S06",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 120 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01995_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01996_S00",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 55 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S01",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 110 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S02",
+   "reason": "off_grid",
+   "detail": "best fit still 0.28 of a grid unit off at 55 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S03",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 55 BPM, grid 1; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S05",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 55 BPM, grid 1; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S06",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 110 BPM, grid 3; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 55 BPM, grid 1; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S08",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 55 BPM, grid 1; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track01996_S13",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track01998_S06",
+   "reason": "tempo_map",
+   "detail": "none of 59 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01998_S07",
+   "reason": "tempo_map",
+   "detail": "none of 59 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01998_S10",
+   "reason": "tempo_map",
+   "detail": "none of 59 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track01998_S11",
+   "reason": "tempo_map",
+   "detail": "none of 59 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02001_S07",
+   "reason": "off_grid",
+   "detail": "segment 0 sits 0.25 of a unit off after the cut"
+  },
+  {
+   "track": "Track02004_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 26 (67 BPM from 110.3 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02007_S00",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02007_S02",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02007_S06",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02007_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02010_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 8 (98 BPM from 19.4 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02010_S01",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02010_S02",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02010_S07",
+   "reason": "off_grid",
+   "detail": "segment 0 sits 0.29 of a unit off after the cut"
+  },
+  {
+   "track": "Track02010_S07",
+   "reason": "off_grid",
+   "detail": "segment 2 sits 0.29 of a unit off after the cut"
+  },
+  {
+   "track": "Track02010_S07_s02",
+   "reason": "inaudible",
+   "detail": "18% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02010_S14",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02010_S15",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02017_S07_s00",
+   "reason": "inaudible",
+   "detail": "35% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02018_S08",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02018_S09",
+   "reason": "tempo_map",
+   "detail": "none of 3 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02019_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02023_S04",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02023_S05",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02024_S07",
+   "reason": "tempo_map",
+   "detail": "none of 31 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02024_S12",
+   "reason": "tempo_map",
+   "detail": "none of 31 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02024_S13_s00",
+   "reason": "inaudible",
+   "detail": "51% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02024_S14",
+   "reason": "tempo_map",
+   "detail": "none of 31 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02030_S06_s00",
+   "reason": "inaudible",
+   "detail": "16% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02032_S04",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02037_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02037_S11",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02037_S12",
+   "reason": "too_short",
+   "detail": "2 notes"
+  },
+  {
+   "track": "Track02037_S13",
+   "reason": "too_short",
+   "detail": "2 notes"
+  },
+  {
+   "track": "Track02038_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02038_S11",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02040_S07",
+   "reason": "tempo_map",
+   "detail": "none of 45 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02042_S01",
+   "reason": "too_short",
+   "detail": "3 notes"
+  },
+  {
+   "track": "Track02042_S02",
+   "reason": "too_short",
+   "detail": "26 notes"
+  },
+  {
+   "track": "Track02045_S06",
+   "reason": "too_short",
+   "detail": "2 notes"
+  },
+  {
+   "track": "Track02045_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02046_S00",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02046_S01",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02046_S05",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02046_S09_s00",
+   "reason": "inaudible",
+   "detail": "11% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02046_S11",
+   "reason": "tempo_map",
+   "detail": "none of 9 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02048_S11",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02048_S12",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02048_S13",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02048_S14",
+   "reason": "tempo_map",
+   "detail": "none of 4 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02050_S07",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02051_S07",
+   "reason": "tempo_map",
+   "detail": "none of 123 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02051_S08",
+   "reason": "tempo_map",
+   "detail": "none of 123 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02052_S08",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02052_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02053_S12",
+   "reason": "tempo_map",
+   "detail": "none of 2 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02062_S07_s00",
+   "reason": "inaudible",
+   "detail": "33% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02063_S03",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02064_S02",
+   "reason": "too_short",
+   "detail": "22 notes"
+  },
+  {
+   "track": "Track02064_S13",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02064_S15",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02064_S17",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02067_S09",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 70 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track02067_S10",
+   "reason": "off_grid",
+   "detail": "best fit still 0.26 of a grid unit off at 70 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track02069_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02074_S07",
+   "reason": "off_grid",
+   "detail": "best fit still 0.27 of a grid unit off at 121 BPM, grid 2; the piece is played rather than sequenced"
+  },
+  {
+   "track": "Track02074_S08",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02074_S09",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02079_S00",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S00",
+   "reason": "off_grid",
+   "detail": "tempo region 4 (122 BPM from 96.6 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S00",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S01",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S01",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S02",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S02",
+   "reason": "off_grid",
+   "detail": "tempo region 4 (122 BPM from 96.6 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S02",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S04",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S05",
+   "reason": "off_grid",
+   "detail": "tempo region 4 (122 BPM from 96.6 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S06",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S08",
+   "reason": "off_grid",
+   "detail": "tempo region 4 (122 BPM from 96.6 s): best fit still 0.27 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S09",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S09",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S12",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02079_S13",
+   "reason": "off_grid",
+   "detail": "tempo region 2 (122 BPM from 2.0 s): best fit still 0.28 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S13",
+   "reason": "off_grid",
+   "detail": "tempo region 4 (122 BPM from 96.6 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02079_S13",
+   "reason": "tempo_map",
+   "detail": "none of 5 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02081_S08",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02081_S10",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02082_S06",
+   "reason": "too_short",
+   "detail": "no segment reached the note floor"
+  },
+  {
+   "track": "Track02084_S07",
+   "reason": "too_short",
+   "detail": "13 notes"
+  },
+  {
+   "track": "Track02086_S00",
+   "reason": "inaudible",
+   "detail": "39% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02086_S05",
+   "reason": "inaudible",
+   "detail": "72% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02086_S07_s00",
+   "reason": "inaudible",
+   "detail": "94% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02087_S00_s05",
+   "reason": "inaudible",
+   "detail": "13% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02087_S02_s02",
+   "reason": "inaudible",
+   "detail": "11% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02087_S03_s04",
+   "reason": "inaudible",
+   "detail": "12% of its reference notes start in silence"
+  },
+  {
+   "track": "Track02088_S02",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02088_S09",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02088_S11",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02088_S13",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02088_S14",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02088_S15",
+   "reason": "tempo_map",
+   "detail": "none of 6 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02092_S06",
+   "reason": "off_grid",
+   "detail": "tempo region 32 (68 BPM from 109.4 s): best fit still 0.26 of a grid unit off"
+  },
+  {
+   "track": "Track02094_S08",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02094_S09",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  },
+  {
+   "track": "Track02094_S13",
+   "reason": "tempo_map",
+   "detail": "none of 10 tempo regions yields 32 notes on one grid"
+  }
+ ],
+ "notes_total": 547516,
+ "clamped_durations_total": 73254,
+ "truncated_durations_total": 410,
+ "max_delta_observed": 255,
+ "delta_limit": 255
+}

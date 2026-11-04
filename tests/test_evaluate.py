@@ -136,6 +136,37 @@ def test_empty_estimate_scores_zero():
     assert scores.estimated_notes == 0
 
 
+# --- octave-tolerant accuracy (Subbab 3.3.5) ---
+
+def test_a_stem_sounding_an_octave_low_is_forgiven_and_the_shift_reported():
+    low = [(pitch - 12, start, end) for pitch, start, end in REFERENCE]
+    assert accuracy(REFERENCE, low).f_measure == pytest.approx(0.0)
+
+    shift, scores = evaluate.octave_tolerant(REFERENCE, low)
+    assert shift == 12
+    assert scores.f_measure == pytest.approx(1.0)
+
+
+def test_a_correct_estimate_keeps_shift_zero():
+    shift, scores = evaluate.octave_tolerant(REFERENCE, REFERENCE)
+    assert shift == 0
+    assert scores.f_measure == pytest.approx(1.0)
+
+
+def test_one_note_in_the_wrong_octave_is_still_wrong():
+    """A whole-stem shift, not chroma folding: a lone octave slip still misses."""
+    slipped = [(REFERENCE[0][0] + 12, *REFERENCE[0][1:])] + REFERENCE[1:]
+    shift, scores = evaluate.octave_tolerant(REFERENCE, slipped)
+    assert shift == 0
+    assert scores.f_measure == pytest.approx(accuracy(REFERENCE, slipped).f_measure)
+    assert scores.f_measure < 1.0
+
+
+def test_an_empty_estimate_stays_zero_with_any_shift():
+    shift, scores = evaluate.octave_tolerant(REFERENCE, [])
+    assert (shift, scores.f_measure) == (0, 0.0)
+
+
 # --- error decomposition (Tabel 3.13) ---
 
 def test_decomposition_reports_every_stage():

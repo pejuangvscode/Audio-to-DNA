@@ -5,7 +5,7 @@
 
 A codec that stores music recordings in synthetic DNA by way of automatic music transcription. Instead of mapping the bytes of an audio file to nucleotides, it transcribes the recording into notes, encodes them as compact feature tokens with repeated phrases replaced by back-references, and maps the tokens to oligonucleotides that satisfy the GC-content and homopolymer constraints of DNA synthesis.
 
-DNA storage is priced per synthesised nucleotide, and compressed audio is already close to its entropy, so the only way to write fewer bases is to change the representation. On 82 held-out stems from the Slakh dataset the codec needed 85.0% fewer bases than encoding the transcribed MIDI file, while the DNA layer itself was lossless.
+DNA storage is priced per synthesised nucleotide, and compressed audio is already close to its entropy, so the only way to write fewer bases is to change the representation. On 1,211 held-out samples from 120 Slakh songs, covering every pitched instrument class, the codec needed 87.4% fewer bases than encoding the transcribed MIDI file, while the DNA layer itself was lossless.
 
 This repository accompanies an undergraduate thesis in Informatics at Universitas Pelita Harapan.
 
@@ -27,19 +27,20 @@ Decoding runs the lossless stages in reverse and writes MIDI and MusicXML. The d
 
 ## Results
 
-Test split: 82 piano and guitar stems from 71 Slakh tracks, 4.6 h of audio, 67,964 reference notes.
+Test split: 1,211 samples from 120 Slakh songs (every pitched stem, 12 instrument classes), 45.4 h of notated music, 447,814 reference notes. Stems whose tempo changes are cut into one sample per tempo. Statistics treat the song as the unit, since stems of one song are not independent.
 
 | Measure | Result |
 |---|---|
-| Token round trip | Bit-identical for all 82 samples |
-| Constraint compliance | All 4,770 oligonucleotides within 40–60% GC; longest homopolymer 2 |
-| Bases for the whole split | 963,540 |
-| Saving against the transcribed MIDI file | 85.0% |
-| Saving from repeat detection alone | 43.2 ± 25.2% per sample |
-| Mean effective density | 0.839 bits per base (best sample 1.000) |
-| Note-level F-measure (50 ms onset, 50 cents) | 0.748 |
+| Token round trip | Bit-identical for all 1,211 samples |
+| Constraint compliance | All 39,237 oligonucleotides within 40–60% GC (41.6–59.4%); longest homopolymer 2 |
+| Bases for the whole split | 7,925,874 |
+| Saving against the transcribed MIDI file | 87.4% |
+| Saving from repeat detection alone | 33.1 ± 24.3% of tokens per sample (29.7% of bases) |
+| Mean effective density | 0.777 bits per base (best sample 1.003) |
+| Note-level F-measure (50 ms onset, 50 cents) | 0.554 per sample, 0.544 per song |
+| Octave-tolerant F-measure (one shift of 0, ±12 or ±24 semitones per sample) | 0.615 per sample, 0.610 per song |
 
-Reconstruction error is dominated by transcription; quantisation has no significant effect on the whole-system F-measure. Two interactions limit the saving: Reed–Solomon codeword granularity hides repeat detection on short payloads, and transcription errors remove about a quarter of the repetition present in the reference notation.
+Reconstruction error is dominated by transcription, and accuracy depends mostly on the instrument: median F-measure per song ranges from 0.79 for piano to 0.13 for synth lead. Part of the low scores is an octave mismatch rather than a transcription failure: 52 samples score below 0.1 strictly but at least 0.4 once shifted by an octave, mostly synth lead, brass, bass and guitar. Quantisation raises F-measure slightly but significantly (+0.032 per song, 95 of 120 songs). The gain comes from instruments with soft attacks: transcribed onsets of string ensembles, reeds and pipes lag the grid by 32–38 ms, and rounding to the grid removes that lag, while on piano and guitar quantisation lowers F-measure slightly. Reed–Solomon codeword granularity hides repeat detection on short payloads: two thirds of the samples with little repetition save no bases from it.
 
 ## Installation
 
@@ -64,19 +65,31 @@ python -m src.decode --input song.fasta --output song.mid
 
 ## Reproducing the experiments
 
-The corpus manifest [`data/slakh_v2/corpus.csv`](data/slakh_v2/corpus.csv) lists every sample with its source track, tempo, grid, split and tercile labels. The audio is not in the repository; it is fetched from a Kaggle mirror of Slakh2100, which needs Kaggle credentials.
+The corpus manifest [`data/slakh_v3/corpus.csv`](data/slakh_v3/corpus.csv) lists every sample with its source track, instrument class, tempo, grid, split and tercile labels. The audio is not in the repository; it is fetched from a Kaggle mirror of Slakh2100, which needs Kaggle credentials.
 
 ```bash
 pip install kagglehub pyyaml
 python scripts/fetch_slakh_subset.py --out new_dataset/slakh_subset --n 151
-python -m src.slakh --source new_dataset/slakh_subset --out data/slakh_v2
-python -m src.calibrate --data-dir data/slakh_v2 --split dev --output results/calibration_v2
-python -m src.experiment --data-dir data/slakh_v2 --split test --onset-threshold 0.7 --output results/slakh_test_v2
-python -m src.characterize --data-dir data/slakh_v2 --split test --output results/characterization_v2
-python -m src.ablation --data-dir data/slakh_v2 --split test --work-dir results/slakh_test_v2/work --onset-threshold 0.7 --output results/ablation_v2 --transcribe
+python -m src.slakh --source new_dataset/slakh_subset --out data/slakh_v3
+python -m src.calibrate --data-dir data/slakh_v3 --split dev --output results/calibration_v3
+python -m src.experiment --data-dir data/slakh_v3 --split test --onset-threshold 0.7 --output results/slakh_test_v3
+python -m src.octave --data-dir data/slakh_v3 --split test --run results/slakh_test_v3
+python -m src.characterize --data-dir data/slakh_v3 --split test --output results/characterization_v3
+python -m src.analysis --data-dir data/slakh_v3 --run results/slakh_test_v3 --characterization results/characterization_v3/per_sample.csv --output results/analysis_v3
+python -m src.ablation --data-dir data/slakh_v3 --split test --work-dir results/slakh_test_v3/work --onset-threshold 0.7 --output results/ablation_v3 --transcribe
 ```
 
-The steps are, in order: preparing the corpus (constant-tempo filter, per-piece tempo and grid fitting, cutting at long rests, development/test split), calibrating the onset threshold on the development split only, running the codec on the test split, characterising the corpus, and running the ablation study.
+The steps are, in order:
+
+1. Preparing the corpus: cutting stems at tempo changes, per-piece tempo and grid fitting, cutting at long rests, dropping samples whose reference notes the audio does not play, and the development/test split.
+2. Calibrating the onset threshold on the development split only.
+3. Running the codec on the test split.
+4. Rescoring it with an octave-tolerant F-measure, since some Slakh patches sound an octave away from their MIDI.
+5. Characterising the corpus.
+6. Running the statistical tests.
+7. Running the ablation study.
+
+Transcriptions are cached by the decoded audio, so an interrupted run picks up where it stopped. `--keep-splits` on `src.slakh` keeps the split of every song an earlier manifest already placed, so growing the corpus leaves the calibration set where it was.
 
 ## Repository layout
 
@@ -98,12 +111,14 @@ src/
   characterize.py  quantitative corpus characterisation
   calibrate.py     onset-threshold calibration
   experiment.py    full evaluation run
+  octave.py        octave-tolerant rescoring of a finished run
+  analysis.py      statistical tests over a finished run
   ablation.py      ablation study
   config.py        every design constant, in one place
 tests/             unit tests
 scripts/           dataset download
 assets/            README images
-data/slakh_v2/     corpus manifest
+data/slakh_v3/     corpus manifest
 ```
 
 ## Tests

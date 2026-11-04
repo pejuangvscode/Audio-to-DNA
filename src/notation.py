@@ -55,9 +55,11 @@ def _write(
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
+    # an empty transcription still gets a score, with nothing on its staff
     pitches = [pitch for pitch, _, _ in events]
     use_two_staves = (
         split_pitch is not None
+        and bool(pitches)
         and min(pitches) < split_pitch <= max(pitches)
     )
 

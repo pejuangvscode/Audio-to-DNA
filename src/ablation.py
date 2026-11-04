@@ -260,11 +260,13 @@ def cached_transcription(
     """
     cache_dir = work_dir / "cache"
     matches = sorted(cache_dir.glob(f"{name}.prepared.*.{params.fingerprint()}.json"))
-    if len(matches) > 1:
-        raise RuntimeError(f"{len(matches)} cached transcriptions match {name}; clear the stale ones")
     if matches:
-        stored = json.loads(matches[0].read_text())
-        return tuple(TranscribedNote(*note) for note in stored["notes"])
+        # one sample can hold several entries: before the cache keyed on the
+        # decoded samples, every rerun added one. Copies that agree are harmless.
+        found = {tuple(map(tuple, json.loads(path.read_text())["notes"])) for path in matches}
+        if len(found) > 1:
+            raise RuntimeError(f"{len(matches)} cached transcriptions of {name} disagree; clear the stale ones")
+        return tuple(TranscribedNote(*note) for note in found.pop())
 
     prepared = work_dir / f"{name}.prepared.wav"
     if not transcribe_missing or not prepared.is_file():
@@ -273,7 +275,11 @@ def cached_transcription(
 
 
 def notated_tempo(sample: CorpusSample, slakh_root: Path) -> int | None:
-    """The tempo written in the source track's MIDI, before Subbab 3.2.5 fitted it."""
+    """The tempo written in the source track's MIDI, before Subbab 3.2.5 fitted it.
+
+    None for a stem whose tempo changes: its segments come from one tempo region
+    each, and the manifest does not record which, so the variant skips them.
+    """
     from src.slakh import _constant_tempo
 
     track, stem = sample.name.split("_")[:2]
@@ -452,8 +458,32 @@ def paired_p(variant: Sequence[float], full: Sequence[float]) -> float:
     return float(wilcoxon(variant, full).pvalue)
 
 
+def track_of(sample: str) -> str:
+    """The Slakh track a sample comes from: Track01884_S02_s01 -> Track01884."""
+    return sample.split("_")[0]
+
+
+def per_track(samples: Sequence[str], values: Sequence[float]) -> list[float]:
+    """Mean value per track, in track order.
+
+    Stems and segments of one track share its song, tempo and repeated
+    sections, so they are not independent observations; the paired tests run
+    on these means, one per track.
+    """
+    groups: dict[str, list[float]] = {}
+    for sample, value in zip(samples, values):
+        groups.setdefault(track_of(sample), []).append(value)
+    return [statistics.fmean(groups[track]) for track in sorted(groups)]
+
+
+def paired_tracks(samples, variant, full) -> float:
+    return paired_p(per_track(samples, variant), per_track(samples, full))
+
+
 def summarise(rows: Sequence[dict]) -> list[dict]:
-    """One line per variant against the full system on the samples both cover."""
+    """One line per variant against the full system on the samples both cover.
+    Totals and medians are over samples; p-values are over tracks.
+    """
     by_variant: dict[str, dict[str, dict]] = {}
     for row in rows:
         by_variant.setdefault(row["variant"], {})[row["sample"]] = row
@@ -482,12 +512,15 @@ def summarise(rows: Sequence[dict]) -> list[dict]:
             "label": variant.label,
             "family": variant.family,
             "samples": len(samples),
+            "tracks": len({track_of(name) for name in samples}),
             "payload_total": sum(payload),
             "payload_change_pct": round((sum(payload) / sum(payload_full) - 1) * 100.0, 2),
             "payload_change_median_pct": round(
                 statistics.median((p / f - 1) * 100.0 for p, f in zip(payload, payload_full)), 2
             ),
-            "p_payload": "" if variant.family == "baseline" else paired_p(payload, payload_full),
+            "p_payload": ""
+            if variant.family == "baseline"
+            else paired_tracks(samples, payload, payload_full),
             "bases_total": sum(bases),
             "bases_change_pct": round((sum(bases) / sum(bases_full) - 1) * 100.0, 2),
             "bases_change_median_pct": round(
@@ -495,10 +528,12 @@ def summarise(rows: Sequence[dict]) -> list[dict]:
             ),
             "more_bases": sum(b > f for b, f in zip(bases, bases_full)),
             "fewer_bases": sum(b < f for b, f in zip(bases, bases_full)),
-            "p_bases": "" if variant.family == "baseline" else paired_p(bases, bases_full),
+            "p_bases": ""
+            if variant.family == "baseline"
+            else paired_tracks(samples, bases, bases_full),
             "f_mean": round(statistics.fmean(f_values), 4),
             "f_change_mean": round(statistics.fmean(f - g for f, g in zip(f_values, f_full)), 4),
-            "p_f": paired_p(f_values, f_full) if variant.family == "fidelity" else "",
+            "p_f": paired_tracks(samples, f_values, f_full) if variant.family == "fidelity" else "",
             "delta_overflows": sum(got[name]["delta_overflows"] for name in samples),
         }
         if "oligos" in got[samples[0]]:
@@ -586,7 +621,8 @@ def write_outputs(rows: Sequence[dict], summary: Sequence[dict], out_dir: Path) 
             "",
             "Δ payload (byte token) dan Δ basa dihitung atas total korpus terhadap sistem "
             "lengkap; median per sampel ada di ablation_summary.csv. q adalah nilai p "
-            "Wilcoxon signed-rank setelah koreksi Benjamini–Hochberg dalam setiap luaran.",
+            "Wilcoxon signed-rank atas rata-rata per track (stem dan potongan dari satu "
+            "lagu tidak independen), setelah koreksi Benjamini–Hochberg dalam setiap luaran.",
         ]
 
     for family, title in family_titles.items():
@@ -595,7 +631,7 @@ def write_outputs(rows: Sequence[dict], summary: Sequence[dict], out_dir: Path) 
             continue
         lines += ["", f"## {title}", ""]
         lines += [
-            "| Varian | n | Δ payload % | q (payload) | Δ basa % | q (basa) "
+            "| Varian | Sampel (track) | Δ payload % | q (payload) | Δ basa % | q (basa) "
             "| F rerata | ΔF | q (F) | Kepatuhan |",
             "|---|---|---|---|---|---|---|---|---|---|",
         ]
@@ -611,7 +647,7 @@ def write_outputs(rows: Sequence[dict], summary: Sequence[dict], out_dir: Path) 
             if line["delta_overflows"]:
                 compliance = f"selisih posisi > 255: {line['delta_overflows']} not"
             lines.append(
-                f"| {line['label']} | {line['samples']} "
+                f"| {line['label']} | {line['samples']} ({line['tracks']}) "
                 f"| {_id(line['payload_change_pct'], '+.1f')} "
                 f"| {_format_p(line.get('q_payload', ''))} "
                 f"| {_id(line['bases_change_pct'], '+.1f')} "

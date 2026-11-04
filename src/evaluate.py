@@ -197,6 +197,33 @@ def accuracy(reference: Sequence[Note], estimated: Sequence[Note]) -> AccuracySc
     )
 
 
+# nearest first, so a tie keeps the smaller shift and an unshifted estimate
+# that scores as well as a shifted one is reported as unshifted
+OCTAVE_SHIFTS = (0, -12, 12, -24, 24)
+
+
+def octave_tolerant(
+    reference: Sequence[Note], estimated: Sequence[Note], shifts: Sequence[int] = OCTAVE_SHIFTS
+) -> tuple[int, AccuracyScores]:
+    """Accuracy after moving the whole estimate by the octave shift that scores best.
+
+    Some Slakh patches sound an octave away from the MIDI they were rendered
+    from (Bass mostly below, Organ and Chromatic Percussion above), and strict
+    scoring counts every note of such a stem as a pitch error. One shift for the
+    whole estimate forgives exactly that: unlike folding pitches to chroma, a
+    single note in the wrong octave still counts as wrong. Returns the shift in
+    semitones alongside the scores, so the strict figure is never silently
+    replaced.
+    """
+    best_shift, best = 0, None
+    for shift in shifts:
+        moved = [(pitch + shift, start, end) for pitch, start, end in estimated]
+        scores = accuracy(reference, moved)
+        if best is None or scores.f_measure > best.f_measure:
+            best_shift, best = shift, scores
+    return best_shift, best
+
+
 # --- error decomposition (Tabel 3.13) ---
 
 @dataclass(frozen=True)

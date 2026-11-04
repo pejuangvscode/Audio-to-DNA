@@ -15,6 +15,7 @@ import argparse
 import csv
 import sys
 import time
+import traceback
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
@@ -235,7 +236,12 @@ def run_all(
     only: Sequence[str] | None = None,
     split: str | None = None,
     params: TranscriptionParams | None = None,
+    crashed: list[tuple[str, str]] | None = None,
 ) -> list[SampleResult]:
+    """Run every selected sample. Given a `crashed` list, a sample that raises
+    is recorded there as (name, traceback) and the run goes on without it;
+    without one, the exception propagates.
+    """
     data_dir, out_dir = Path(data_dir), Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -249,7 +255,15 @@ def run_all(
     results: list[SampleResult] = []
     for index, sample in enumerate(samples, start=1):
         print(f"[{index}/{len(samples)}] {sample.name} ...", flush=True)
-        results.append(run_sample(sample, out_dir, grid_code, params))
+        if crashed is None:
+            results.append(run_sample(sample, out_dir, grid_code, params))
+            continue
+        try:
+            results.append(run_sample(sample, out_dir, grid_code, params))
+        except Exception:
+            trace = traceback.format_exc()
+            print(trace, file=sys.stderr, flush=True)
+            crashed.append((sample.name, trace))
     return results
 
 
@@ -434,21 +448,32 @@ def main(argv: list[str] | None = None) -> int:
             ),
         )
 
+    # one sample that raises must not cost the hours spent on the others
+    crashed: list[tuple[str, str]] = []
     results = run_all(
-        args.data_dir, args.output, args.grid, args.only, args.split, params
+        args.data_dir, args.output, args.grid, args.only, args.split, params, crashed
     )
     summary = write_tables(results, args.output)
 
     usable = [result for result in results if result.ok]
     print()
-    print(f"{len(usable)} of {len(results)} samples completed without problems")
+    print(f"{len(usable)} of {len(results) + len(crashed)} samples completed without problems")
     print(f"tables written to {summary} and {args.output / 'per_sample.csv'}")
 
     for result in results:
         for problem in result.problems:
             print(f"  {result.sample.name}: {problem}")
 
-    return 0 if len(usable) == len(results) else 1
+    if crashed:
+        crash_log = args.output / "crashed.txt"
+        crash_log.write_text(
+            "\n".join(f"== {name}\n{trace}" for name, trace in crashed), encoding="utf-8"
+        )
+        print(f"{len(crashed)} samples raised and are left out of the tables; see {crash_log}")
+        for name, trace in crashed:
+            print(f"  {name}: {trace.strip().splitlines()[-1]}")
+
+    return 0 if len(usable) == len(results) and not crashed else 1
 
 
 if __name__ == "__main__":

@@ -67,6 +67,13 @@ def test_transcribed_notes_become_readable_notation(tmp_path):
     assert parsed_pitches(path) == [60, 64, 67]
 
 
+def test_an_empty_transcription_still_writes_a_score(tmp_path):
+    """A silent stem transcribes to nothing; that must not stop a corpus run."""
+    path = write_from_quantized([], tmp_path / "empty.musicxml", tempo=120)
+    assert path.is_file()
+    assert parsed_pitches(path) == []
+
+
 def test_tempo_is_carried_into_the_file(tmp_path):
     path = write_from_quantized(QUANTISED, tmp_path / "tempo.musicxml", tempo=96)
     assert "96" in path.read_text()

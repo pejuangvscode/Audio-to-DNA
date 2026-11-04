@@ -6,6 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import NamedTuple, Sequence
 
+import numpy as np
+import soundfile as sf
+
 from src import config as cfg
 
 
@@ -55,11 +58,16 @@ class Transcription:
         return len(self.notes)
 
 
-def _file_digest(path: Path) -> str:
-    digest = hashlib.sha256()
-    with open(path, "rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
+def _audio_digest(path: Path) -> str:
+    """Digest of the decoded samples, not of the file's bytes.
+
+    libsndfile stamps the time into every float WAV it writes (its PEAK
+    chunk), so the same audio prepared again in a later run never had the
+    same bytes, and the cache never hit across runs.
+    """
+    samples, sample_rate = sf.read(path, dtype="float32", always_2d=True)
+    digest = hashlib.sha256(str(sample_rate).encode())
+    digest.update(np.ascontiguousarray(samples).tobytes())
     return digest.hexdigest()[:16]
 
 
@@ -125,7 +133,7 @@ def transcribe_cached(
     cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_file = cache_dir / (
-        f"{audio_path.stem}.{_file_digest(audio_path)}.{params.fingerprint()}.json"
+        f"{audio_path.stem}.{_audio_digest(audio_path)}.{params.fingerprint()}.json"
     )
 
     if cache_file.is_file():
@@ -138,7 +146,10 @@ def transcribe_cached(
         )
 
     result = transcribe(audio_path, params, midi_path)
-    cache_file.write_text(
+    # written aside and then renamed, so a run stopped with Ctrl+C mid-write
+    # leaves no half-written entry for the next run to choke on
+    partial = cache_file.with_suffix(".partial")
+    partial.write_text(
         json.dumps(
             {
                 "source": audio_path.name,
@@ -148,6 +159,7 @@ def transcribe_cached(
             indent=1,
         )
     )
+    partial.replace(cache_file)
     return result
 
 

@@ -27,6 +27,7 @@ from src.ablation import (
     delta_overflows,
     naive_bases,
     paired_p,
+    per_track,
     summarise,
 )
 from src.baselines import count_bases
@@ -142,6 +143,23 @@ def test_cached_transcription_is_read_without_running_the_model(tmp_path: Path):
     assert cached_transcription(tmp_path, "S1", TranscriptionParams(onset_threshold=0.5)) is None
 
 
+def test_cached_copies_are_read_when_they_agree_and_refused_when_not(tmp_path: Path):
+    params = TranscriptionParams(onset_threshold=0.7)
+    cache = tmp_path / "cache"
+    cache.mkdir()
+    for digest in ("old", "new"):
+        (cache / f"S1.prepared.{digest}.{params.fingerprint()}.json").write_text(
+            json.dumps({"notes": [[60, 0.5, 1.0, 0.8]]})
+        )
+    assert cached_transcription(tmp_path, "S1", params)[0].pitch == 60
+
+    (cache / f"S1.prepared.other.{params.fingerprint()}.json").write_text(
+        json.dumps({"notes": [[62, 0.5, 1.0, 0.8]]})
+    )
+    with pytest.raises(RuntimeError, match="disagree"):
+        cached_transcription(tmp_path, "S1", params)
+
+
 # --- statistics ---
 
 def test_benjamini_hochberg_matches_a_hand_computed_example():
@@ -169,6 +187,21 @@ def test_summary_compares_each_variant_with_the_full_system():
     assert summary["no_lz77"]["p_bases"] == 1.0
     assert summary["no_lz77"]["p_f"] == ""  # lossless variants do not test F
     assert summary["no_lz77"]["q_payload"] == summary["no_lz77"]["p_payload"]
+
+
+def test_samples_of_one_track_count_as_one_unit():
+    """Two stems of Track00001 and one of Track00002 give two track means."""
+    samples = ["Track00001_S00", "Track00001_S01", "Track00002_S00"]
+    assert per_track(samples, [10.0, 20.0, 7.0]) == [15.0, 7.0]
+
+    rows = []
+    for sample in samples:
+        rows.append({"sample": sample, "variant": "full", "payload_bytes": 100,
+                     "bases": 1000, "f_measure": 0.8, "delta_overflows": 0})
+        rows.append({"sample": sample, "variant": "no_lz77", "payload_bytes": 150,
+                     "bases": 1000, "f_measure": 0.8, "delta_overflows": 0})
+    line = {l["variant"]: l for l in summarise(rows)}["no_lz77"]
+    assert (line["samples"], line["tracks"]) == (3, 2)
 
 
 def test_variant_keys_are_unique():

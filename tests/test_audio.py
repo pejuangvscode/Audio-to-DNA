@@ -6,13 +6,16 @@ is not bit-reproducible, these check plumbing and contracts, not exact notes.
 
 from __future__ import annotations
 
+import time
+from dataclasses import replace
+
 import numpy as np
 import pytest
 import soundfile as sf
 
 from src import config as cfg
 from src import preprocess
-from src.transcribe import TranscriptionParams, transcribe_cached
+from src.transcribe import TranscriptionParams, _audio_digest, transcribe_cached
 
 
 def tone(path, frequency=440.0, seconds=1.0, sample_rate=44100, channels=1):
@@ -23,7 +26,9 @@ def tone(path, frequency=440.0, seconds=1.0, sample_rate=44100, channels=1):
     signal = (wave * envelope).astype(np.float32)
     if channels > 1:
         signal = np.repeat(signal[:, None], channels, axis=1)
-    sf.write(path, signal, sample_rate, subtype="FLOAT")
+    # MP3 has no FLOAT subtype; asking for one made the MP3 test skip itself
+    subtype = None if str(path).lower().endswith(".mp3") else "FLOAT"
+    sf.write(path, signal, sample_rate, subtype=subtype)
     return path
 
 
@@ -135,6 +140,19 @@ def test_describe_reports_the_facts_bab_iv_tabulates(tmp_path):
 
 
 # --- transcription ---
+
+def test_the_same_audio_prepared_again_keeps_its_cache_key(tmp_path):
+    """libsndfile stamps the write time into a float WAV, so the key must come
+    from the samples; a rerun writes the prepared WAV anew."""
+    audio = preprocess.load(tone(tmp_path / "a.wav"))
+    first = _audio_digest(preprocess.write_wav(audio, tmp_path / "first.wav"))
+    time.sleep(1.1)
+    second = _audio_digest(preprocess.write_wav(audio, tmp_path / "second.wav"))
+    assert first == second
+
+    quieter = replace(audio, samples=audio.samples * 0.5)
+    assert _audio_digest(preprocess.write_wav(quieter, tmp_path / "other.wav")) != first
+
 
 @pytest.mark.slow
 def test_transcription_finds_a_sustained_tone(tmp_path):
