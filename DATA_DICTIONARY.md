@@ -1,6 +1,6 @@
 # Data dictionary
 
-This document describes every file in the results archive of the MP3/FLAC-to-DNA codec, as used in the undergraduate thesis at Universitas Pelita Harapan and the accompanying ICACSIS paper. It lists what one row of each file stands for and what every column means, with its unit. Equation, table and section numbers (for example Eq. 3.4) refer to the thesis.
+This document describes every file in the results archive of the Audio-to-DNA codec, as used in the undergraduate thesis at Universitas Pelita Harapan and the accompanying ICACSIS paper. It lists what one row of each file stands for and what every column means, with its unit. Equation, table and section numbers (for example Eq. 3.4) refer to the thesis.
 
 ## Conventions
 

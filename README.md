@@ -1,6 +1,6 @@
-# MP3-to-DNA
+# Audio-to-DNA
 
-[![Tests](https://github.com/pejuangvscode/MP3-to-DNA/actions/workflows/tests.yml/badge.svg)](https://github.com/pejuangvscode/MP3-to-DNA/actions/workflows/tests.yml)
+[![Tests](https://github.com/pejuangvscode/Audio-to-DNA/actions/workflows/tests.yml/badge.svg)](https://github.com/pejuangvscode/Audio-to-DNA/actions/workflows/tests.yml)
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
 
 A codec that stores music recordings in synthetic DNA by way of automatic music transcription. Instead of mapping the bytes of an audio file to nucleotides, it transcribes the recording into notes, encodes them as compact feature tokens with repeated phrases replaced by back-references, and maps the tokens to oligonucleotides that satisfy the GC-content and homopolymer constraints of DNA synthesis.
@@ -47,8 +47,8 @@ Reconstruction error is dominated by transcription, and accuracy depends mostly 
 Developed and tested with Python 3.11. Transcription runs on the CPU, so no GPU is needed.
 
 ```bash
-git clone https://github.com/pejuangvscode/MP3-to-DNA.git
-cd MP3-to-DNA
+git clone https://github.com/pejuangvscode/Audio-to-DNA.git
+cd Audio-to-DNA
 pip install -r requirements.txt
 ```
 

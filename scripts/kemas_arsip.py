@@ -2,7 +2,7 @@
 
     python scripts/kemas_arsip.py
 
-Copies the files described in DATA_DICTIONARY.md into arsip/mp3-to-dna-data-v3/,
+Copies the files described in DATA_DICTIONARY.md into arsip/audio-to-dna-data-v3/,
 keeping their paths from the repository, writes a README and a SHA-256 list,
 and zips the folder. Work files and the reconstructed MIDI (about 336 MB) are
 left out, since decoding the archived FASTA files regenerates them.
@@ -20,7 +20,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "mp3-to-dna-data-v3"
+NAME = "audio-to-dna-data-v3"
 OUT = ROOT / "arsip"
 FOLDER = OUT / NAME
 ZIP = OUT / f"{NAME}.zip"
@@ -71,7 +71,7 @@ def readme(commit: str, tag: str, dirty: bool, repo: str, samples: int) -> str:
         if dirty
         else "The code had no uncommitted changes when this archive was packed."
     )
-    return f"""# MP3-to-DNA: test results (data v3)
+    return f"""# Audio-to-DNA: test results (data v3)
 
 Results of an undergraduate thesis in Informatics at Universitas Pelita Harapan. The thesis builds a codec that stores music recordings in synthetic DNA by way of automatic music transcription: a recording is transcribed into notes with basic-pitch, quantised to a rhythmic grid, encoded as compact feature tokens with repeated phrases replaced by back-references, and mapped to oligonucleotides that satisfy the GC-content and homopolymer constraints, protected by a Reed–Solomon outer code and a rotating-code inner code.
 

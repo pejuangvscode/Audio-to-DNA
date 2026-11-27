@@ -1,4 +1,4 @@
-# MP3-to-DNA dependencies, pinned to the versions the results were produced
+# Audio-to-DNA dependencies, pinned to the versions the results were produced
 # with (Python 3.11.3). Transcription runs on the CPU.
 
 # --- audio and transcription ----------------------------------------------
